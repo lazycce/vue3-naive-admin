@@ -3,6 +3,9 @@ import App from './App.vue'
 import naive from './naiveui'
 import createAppRouter from './router/router'
 
+import '@/assets/styles/index.scss' // global css
+import '@/assets/styles/ruoyi.scss' // it css
+
 const app = createApp(App)
 
 // 注册 naive 组件
@@ -11,3 +14,4 @@ app.use(naive)
 app.use(createAppRouter())
 
 app.mount('#app')
+
