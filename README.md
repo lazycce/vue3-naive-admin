@@ -2,6 +2,3 @@
 a simple vue3-admin 
 
 start init 
-
-hello world
-
