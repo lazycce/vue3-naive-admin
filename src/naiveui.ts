@@ -9,7 +9,9 @@ import {
   NLayoutSider, 
   NMenu, 
   NSpace, 
-  NScrollbar
+  NScrollbar,
+  NBreadcrumb,
+  NBreadcrumbItem
 } from 'naive-ui'
 
 const naive = create({
@@ -32,7 +34,10 @@ const naive = create({
     // 输入框
     NInput,
     // 滚动条
-    NScrollbar
+    NScrollbar,
+    // 面包屑
+    NBreadcrumb,
+    NBreadcrumbItem
   ]
 })
 

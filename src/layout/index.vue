@@ -1,19 +1,40 @@
 <template>
-  <div>
-    <sidebar class="sidebar-container" />
-    <AppMain />
-  </div>
+  <n-layout has-sider>
+    <n-layout-sider
+      class="sidebar-container"
+      bordered
+      collapse-mode="width"
+      :collapsed-width="64"
+      :width="200"
+      :native-scrollbar="false"
+    >
+      <logo />
+      <sidebar />
+    </n-layout-sider>
+      <n-layout class="main-container" >
+        <n-layout-header>
+          <navbar />
+        </n-layout-header>
+        <n-layout-content>
+          <AppMain />
+        </n-layout-content>
+      </n-layout>
+  </n-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent, h, ref, resolveComponent } from 'vue'
 import AppMain from './components/AppMain.vue'
 import sidebar from './components/Sidebar/index.vue'
+import logo from './components/Sidebar/Logo.vue'
+import navbar from './components/Navbar/index.vue'
 
 export default defineComponent({
   components: {
     AppMain,
-    sidebar
+    sidebar,
+    logo,
+    navbar
   },
   setup () {
     return {
@@ -22,14 +43,9 @@ export default defineComponent({
 })
 </script>
 
-<style>
-.n-layout-header,
-.n-layout-footer {
-  background: rgba(128, 128, 128, 0.2);
-  padding: 24px;
-}
+<style lang="scss" scoped>
 
-.n-layout-content {
-  background: rgba(128, 128, 128, 0.4);
+.container {
+  margin-left: 200px;
 }
 </style>

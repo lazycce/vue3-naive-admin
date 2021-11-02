@@ -1,32 +1,23 @@
 <template>
-  <div>
-    <logo />
-    <n-scrollbar :x-scrollable="false">
-      <n-menu
-        mode="vertical"
-        :inverted="true" 
-        :indent="20"
-        v-model:value="activeKey" 
-        :options="menuOptions"
-        :collapsed="false"
-        :collapsed-width="64"
-        :collapsed-icon-size="20"
-        accordion
-      />
-    </n-scrollbar>
-  </div>
+  <n-menu
+    :inverted="inverted"
+    :collapsed-width="64"
+    :collapsed-icon-size="22"
+    :options="menuOptions"
+    :indent="20"
+    accordion
+  />
 </template>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import logo from './Logo.vue'
-import variables from "@/assets/styles/variables.scss";
+import { h, defineComponent, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 
 function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -34,15 +25,7 @@ function renderIcon (icon) {
 
 const menuOptions = [
   {
-    label: () =>
-      h(
-        'a',
-        {
-          target: '_blank',
-          rel: 'noopenner noreferrer'
-        },
-        '且听风吟'
-      ),
+    label: '且听风吟',
     key: 'hear-the-wind-sing',
     icon: renderIcon(BookIcon)
   },
@@ -60,7 +43,7 @@ const menuOptions = [
   {
     label: '寻羊冒险记',
     key: 'a-wild-sheep-chase',
-    icon: renderIcon(BookIcon),
+    icon: renderIcon(BookIcon)
   },
   {
     label: '舞，舞，舞',
@@ -108,50 +91,37 @@ const menuOptions = [
       {
         label: '过去增多，未来减少',
         key: 'the-past-increases-the-future-recedes'
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes1'
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes2'
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes3'
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes4'
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes5'
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes6'
       }
     ]
   }
 ]
 
 export default defineComponent({
-  name: 'siderIndex',
-  components: {
-    logo
-  },
-  setup() {
-    const activeKey = ref(null)
-
+  setup () {
     return {
-      activeKey,
-      menuOptions
+      inverted: ref(false),
+      menuOptions,
+      renderMenuIcon (option) {
+        // 渲染图标占位符以保持缩进
+        if (option.key === 'sheep-man') return true
+        // 返回 falsy 值，不再渲染图标及占位符
+        if (option.key === 'food') return null
+        return h(NIcon, null, { default: () => h(BookmarkOutline) })
+      },
+      expandIcon () {
+        return h(NIcon, null, { default: () => h(CaretDownOutline) })
+      }
     }
-  },
+  }
 })
 </script>
-<style scoped>
 
+<style scoped>
+  .layout-sider {
+    min-height: 100vh;
+    box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+    position: relative;
+    z-index: 13;
+    transition: all 0.2s ease-in-out;
+  }
 </style>
