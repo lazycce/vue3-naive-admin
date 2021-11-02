@@ -1,7 +1,8 @@
 <template>
-  <div style="padding: 0 15px;">
+  <div style="padding: 0 15px;" @click="toggleClick">
     <svg
     class="hamburger"
+    :class="{'is-active':isActive}"
     viewBox="0 0 1024 1024"
     xmlns="http://www.w3.org/2000/svg"
     width="64"
@@ -11,6 +12,24 @@
     </svg>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const isActive = ref(true)
+    const toggleClick = () => {
+      console.log('toggleClick', isActive.value)
+      isActive.value = !isActive.value
+    }
+
+    return {
+      isActive,
+      toggleClick
+    }
+  },
+})
+</script>
 
 <style lang="scss" scoped>
   .hamburger {
@@ -18,5 +37,8 @@
     vertical-align: middle;
     width: 20px;
     height: 20px;
+    &.is-active {
+      transform: rotate(180deg)
+    }
   }
 </style>
