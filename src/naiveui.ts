@@ -1,4 +1,16 @@
-import { create, NButton, NInput, NLayout, NLayoutContent, NLayoutFooter, NLayoutHeader, NLayoutSider, NMenu, NSpace} from 'naive-ui'
+import { 
+  create, 
+  NButton, 
+  NInput, 
+  NLayout, 
+  NLayoutContent, 
+  NLayoutFooter, 
+  NLayoutHeader, 
+  NLayoutSider, 
+  NMenu, 
+  NSpace, 
+  NScrollbar
+} from 'naive-ui'
 
 const naive = create({
   components: [
@@ -19,6 +31,8 @@ const naive = create({
     NMenu,
     // 输入框
     NInput,
+    // 滚动条
+    NScrollbar
   ]
 })
 
