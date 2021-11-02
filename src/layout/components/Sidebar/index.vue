@@ -1,5 +1,5 @@
 <template>
-  <div class="has-logo">
+  <div>
     <logo />
   </div>
 </template>
