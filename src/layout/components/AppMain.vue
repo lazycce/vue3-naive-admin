@@ -10,19 +10,19 @@
   </section>
 </template>
 
-<script>
-import { defineComponent, computed } from 'vue'
-import { useRouter } from 'vue-router'
-export default defineComponent({
-  name: 'appMain',
-  setup() {
-    // 初始化路由
-    const router = useRouter()
-    const key = computed(() => router.path)
+<script lang="ts">
+  import { defineComponent, computed } from 'vue'
+  import { useRouter } from 'vue-router'
+  export default defineComponent({
+    name: 'appMain',
+    setup() {
+      // 初始化路由
+      const router = useRouter()
+      const key = computed(() => router.path)
 
-    return {
-      key
+      return {
+        key
+      }
     }
-  }
-})
+  })
 </script>

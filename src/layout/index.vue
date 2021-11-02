@@ -1,57 +1,22 @@
 <template>
-   <n-space vertical size="large">
-    <n-layout has-sider>
-      <n-layout-sider content-style="padding: 24px;">
-        <n-menu v-model:value="activeKey" :options="menuOptions" />
-      </n-layout-sider>
-      <n-layout>
-        <n-layout-header>颐和园路</n-layout-header>
-        <n-layout-content content-style="padding: 24px;">
-            <AppMain />
-        </n-layout-content>
-      </n-layout>
-    </n-layout>
-  </n-space>
+  <div>
+    <sidebar class="sidebar-container" />
+    <AppMain />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, h, ref, resolveComponent } from 'vue'
 import AppMain from './components/AppMain.vue'
-const menuOptions = [
-  {
-    label: () =>
-      h(
-        resolveComponent('router-link'),
-        {
-          to: '/index',
-          rel: 'noopenner noreferrer'
-        },
-        { default: () => '404' }
-      ),
-    key: '404',
-  },
-  {
-    label: () =>
-      h(
-        resolveComponent('router-link'),
-        {
-          to: '/401',
-          rel: 'noopenner noreferrer'
-        },
-        { default: () => '401' }
-      ),
-    key: '401',
-  }
-]
+import sidebar from './components/Sidebar/index.vue'
 
 export default defineComponent({
   components: {
-    AppMain
+    AppMain,
+    sidebar
   },
   setup () {
     return {
-      activeKey: ref(null),
-      menuOptions
     }
   }
 })
