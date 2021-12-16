@@ -9,6 +9,7 @@
 import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
+  name: '404',
   setup() {
     const val = ref(0)
     const key = ref('key')

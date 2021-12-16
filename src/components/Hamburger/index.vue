@@ -19,7 +19,6 @@ export default defineComponent({
   setup() {
     const isActive = ref(true)
     const toggleClick = () => {
-      console.log('toggleClick', isActive.value)
       isActive.value = !isActive.value
     }
 
@@ -37,6 +36,7 @@ export default defineComponent({
     vertical-align: middle;
     width: 20px;
     height: 20px;
+    transition: 0.5s ease-in-out;
     &.is-active {
       transform: rotate(180deg)
     }

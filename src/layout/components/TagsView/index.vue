@@ -2,37 +2,90 @@
   <div id="tags-view-container" class="tags-view-container">
     <div class="tags-view-wrapper">
       <router-link
+        v-for="tag in visitedViews"
+        :key="tag.path"
         class="tags-view-item"
-        :class="isActive() === '/401'? 'active': ''"
-        to="/401"
+        :class="isActive() === tag.path? 'active': ''"
+        :to="tag.path"
       >
-        首页
-      </router-link>
-      <router-link
-        class="tags-view-item"
-        :class="isActive() === '/index'? 'active': ''"
-        to="/"
-      >
-        404
+        {{ tag.title }}
       </router-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineComponent, computed, watch, onMounted, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useStore} from 'vuex'
+import { pathResolve } from '/@/utils'
+
+/** 当路由 重meta.affix 为 true 事 tagView 固定 */
+function filterAffixTags(routes, currentPath,basePath = '/'):Array<any[]> {
+  let tags = []
+  routes.forEach(route => {
+    const tagPath = pathResolve(basePath,  route.path) // 这边有问题
+    if ((route.meta && route.meta.affix) || (!route.children && tagPath === currentPath)) {
+      tags.push({
+        fullPath: tagPath,
+        path: tagPath,
+        name: route.name,
+        meta: { ...route.meta }
+      })
+    }
+    if (route.children) {
+      const tempTags = filterAffixTags(route.children, currentPath, route.path)
+      if (tempTags.length >= 1) {
+        tags = [...tags, ...tempTags]
+      }
+    }
+  });
+  return tags
+}
 
 export default defineComponent({
   setup() {
+    const route = useRoute()
     const router = useRouter()
-    const isActive = () => {
-      console.log(router.currentRoute.value.path)
-      return router.currentRoute.value.path
+    const store = useStore()
+    const routes = computed(() => store.state.permission.sidebarRouters)
+
+    const addTags = () => {
+      const { name } = route
+      if (name) {
+        store.dispatch('tagsView/addView', route)
+      }
     }
 
+    const affixTags = ref([])
+    const initTags = () => {
+      affixTags.value.push( ...filterAffixTags(routes.value, route.path))
+      for (const tag of affixTags.value) {
+        // Must have tag name
+        if (tag.name) {
+          store.dispatch('tagsView/addVisitedView', tag)
+        }
+      }
+    }
+
+    const visitedViews = computed(() => store.state.tagsView.visitedViews)
+
+    // 监听路由变换
+    watch(route, () => {
+      addTags()
+    })
+
+    const isActive = () => {
+      return route.path
+    }
+
+    onMounted(() => {
+      initTags()
+    })
+
     return {
-      isActive
+      isActive,
+      visitedViews
     }
   },
 })

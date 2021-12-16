@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Breadcrumb from '@/components/Breadcrumb/index.vue'
-import Hamburger from '@/components/Hamburger/index.vue'
+import Breadcrumb from '/@/components/Breadcrumb/index.vue'
+import Hamburger from '/@/components/Hamburger/index.vue'
 
 export default defineComponent({
   components: {

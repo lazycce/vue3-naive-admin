@@ -3,6 +3,7 @@
     <n-layout-sider
       class="sidebar-container"
       bordered
+      show-trigger
       collapse-mode="width"
       :collapsed-width="64"
       :width="200"

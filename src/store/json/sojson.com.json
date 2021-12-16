@@ -1,0 +1,39 @@
+{
+	"msg": "操作成功",
+	"code": 200,
+	"data": [
+		{
+		"name": "Kpi",
+		"path": "/kpi",
+		"component": "Layout",
+		"alwaysShow": true,
+		"meta": {
+			"title": "业务管理",
+			"icon": "PersonIcon",
+			"noCache": false,
+			"link": null
+		},
+		"children": [{
+			"name": "401",
+			"path": "",
+			"component": "error/401.vue",
+			"meta": {
+				"title": "业绩管理1",
+				"icon": "PersonIcon",
+				"noCache": false,
+				"link": null 
+			}
+		},
+		{
+			"name": "404",
+			"path": "404",
+			"component": "error/404.vue",
+			"meta": {
+				"title": "业绩管理2",
+				"icon": "PersonIcon",
+				"noCache": false,
+				"link": null }
+		}]
+		}
+	]
+}

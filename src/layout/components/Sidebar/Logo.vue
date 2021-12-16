@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import logoImg from '@/assets/logo/logo.png'
+import logoImg from '/@/assets/logo/logo.png'
 
 export default defineComponent({
   setup() {

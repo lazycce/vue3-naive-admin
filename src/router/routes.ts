@@ -1,4 +1,4 @@
-import Layout from '@/layout/index.vue'
+import Layout from '/@/layout/index.vue'
 // 公共路由
 export default [
   {
@@ -8,19 +8,26 @@ export default [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/error/404.vue'),
+        component: () => import('/@/views/index.vue'),
         name: 'Index',
+        meta: { title: '首页', icon: 'WineIcon', affix: true }
       },
-      {
-        path: '401',
-        component: () => import('@/views/error/401.vue'),
-        name: 'error401',
-      }
     ]
   },
-  {
-    path: '/404',
-    component: () => import('@/views/error/404.vue'),
-    hidden: true
-  },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: () => import('@/views/error/404.vue'),
+  //       name: 'Index',
+  //     },
+  //     {
+  //       path: '401',
+  //       component: () => import('@/views/error/401.vue'),
+  //       name: 'error401',
+  //     }
+  //   ]
+  // }
 ]
